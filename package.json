@@ -1,0 +1,19 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Professional Weather Application with Vanilla HTML, CSS, JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "weather",
+    "weather-app",
+    "vanilla-javascript",
+    "open-meteo",
+    "glassmorphism"
+  ],
+  "author": "",
+  "license": "MIT"
+}

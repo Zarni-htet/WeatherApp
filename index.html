@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Professional Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <i data-lucide="cloud-sun"></i>
+                    Weather Dashboard
+                </h1>
+                <div class="header-controls">
+                    <form id="search-form" class="search-form" novalidate>
+                        <div class="search-input-group">
+                            <i data-lucide="search" class="search-icon"></i>
+                            <input 
+                                type="text" 
+                                id="city-input" 
+                                class="search-input" 
+                                placeholder="Search for a city..."
+                                autocomplete="off"
+                                aria-label="City name"
+                            >
+                            <button type="submit" id="search-btn" class="search-btn" aria-label="Search">
+                                <i data-lucide="arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <button id="geolocate-btn" class="geo-btn" aria-label="Use current location">
+                        <i data-lucide="map-pin"></i>
+                        <span>Current Location</span>
+                    </button>
+                    <button id="unit-toggle" class="unit-toggle" aria-label="Toggle temperature unit">
+                        <span id="unit-text">°C</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Loading State -->
+            <section id="loading" class="state-section loading-state" style="display: none;">
+                <div class="state-card">
+                    <div class="loading-spinner"></div>
+                    <p class="state-message">Loading weather data...</p>
+                </div>
+            </section>
+
+            <!-- Error State -->
+            <section id="error-message" class="state-section error-state" style="display: none;">
+                <div class="state-card">
+                    <i data-lucide="alert-circle" class="state-icon error-icon"></i>
+                    <p class="state-message" id="error-text"></p>
+                </div>
+            </section>
+
+            <!-- Empty State -->
+            <section id="empty-state" class="state-section empty-state">
+                <div class="state-card">
+                    <i data-lucide="cloud" class="state-icon"></i>
+                    <h2 class="state-title">Search for Weather</h2>
+                    <p class="state-message">Enter a city name or use your current location to get started</p>
+                </div>
+            </section>
+
+            <!-- Current Weather Section -->
+            <section id="current-section" class="current-section" style="display: none;">
+                <div class="current-card glass-card">
+                    <div class="current-header">
+                        <div class="current-location">
+                            <h2 id="current-city" class="current-city"></h2>
+                            <p class="current-time" id="current-time"></p>
+                        </div>
+                        <div class="current-icon-container">
+                            <i id="current-icon" data-lucide="sun" class="current-icon"></i>
+                        </div>
+                    </div>
+                    <div class="current-main">
+                        <div class="current-temp-container">
+                            <span id="current-temp" class="current-temp"></span>
+                            <span class="temp-unit">°</span>
+                        </div>
+                        <p id="current-condition" class="current-condition"></p>
+                    </div>
+                    <div class="current-details">
+                        <div class="detail-item">
+                            <i data-lucide="thermometer"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Feels Like</span>
+                                <span id="feels-like" class="detail-value"></span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="droplets"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Humidity</span>
+                                <span id="humidity" class="detail-value"></span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="wind"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">Wind Speed</span>
+                                <span id="wind-speed" class="detail-value"></span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="sun"></i>
+                            <div class="detail-info">
+                                <span class="detail-label">UV Index</span>
+                                <span id="uv-index" class="detail-value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast Section -->
+            <section id="hourly-section" class="forecast-section" style="display: none;">
+                <h2 class="section-title">
+                    <i data-lucide="clock"></i>
+                    Hourly Forecast
+                </h2>
+                <div class="hourly-container glass-card">
+                    <div id="hourly-forecast" class="hourly-forecast"></div>
+                </div>
+            </section>
+
+            <!-- Daily Forecast Section -->
+            <section id="daily-section" class="forecast-section" style="display: none;">
+                <h2 class="section-title">
+                    <i data-lucide="calendar"></i>
+                    7-Day Forecast
+                </h2>
+                <div class="daily-container glass-card">
+                    <div id="daily-forecast" class="daily-forecast"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/weather.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
